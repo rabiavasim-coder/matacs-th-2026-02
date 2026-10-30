@@ -124,4 +124,4 @@ given scores already computed by the system. Do not recalculate, adjust, or
 disagree with them. Use only the numbers provided. Do not add facts. Mention
 the one or two criteria that most explain the position. If a proposal is
 flagged or ineligible, state the given reason plainly. Maximum 30 words each.
-Return only a JSON array: [{"proposal_id": "...", "reason": "..."}].
+Return only a JSON array: [{"proposal_id": "...", "reason": "..."}, flags and missing_information}}.
