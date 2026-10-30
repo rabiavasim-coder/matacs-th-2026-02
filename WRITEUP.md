@@ -1,6 +1,6 @@
 1. AI vs. rules. 
 AI acts as  a document extractor. It reads every proposal which may be in varied formats and then extracts the required information based on the given JSON format. These include  including contractor experience, pricing, timelines, warranties, licences, insurance and team details as this is the information on which the later scores will be evaluated. It will also interpret safety/monitoring plans and detect any security flags,  identify or highlight the missing information in the proposal, mark page number for each value filled in so human can track down relevant / supporting information if required later for reference. All the data is consolidated into single JSON file instead of giving multiple prompts and managing multiple  JSON files.
-Another AI prompt is given to give a valid reason based on the scores explaining the why of rejection and state any missing information in the proposal which lead to the rejection of proposal. It is for the team to re verify or explain the position.
+Another AI prompt is given to give a valid reason based on the scores explaining the why of rejection and state any missing information in the proposal which lead to explaining each position, including anything missing from the proposal. It is for the team to re verify or explain the position.
 Python Code can be used for pass/fail checks, proposed budget, timeline, workforce are within the requirement, weighted score calculations and rankings. Also if any information is missing it is scored 0 as it is an error at the submitters end to not provide complete information.
 
 2. Consistency and explainability.
@@ -15,7 +15,7 @@ Given the mandatory and pass/fail criterion, the scoring engine will apply fixed
 
 -Team and approach (15): named lead (3), defined crew (3), safety plan (4), and monitoring arrangements (5).
 Results:
-For repeatability, as the criterion is fixed and scores are mathematically calculated, the same ranking will be produced each time. AI variability may be needed to control using structured outputs, validation, human verification of uncertain information. Reviewers would see the overall score, individual criterion scores, supporting evidence and reasons for each ranking. Missing weighted information would receive zero points and be clearly identified.
+For repeatability, as the criterion is fixed and scores are mathematically calculated,Scoring is pure arithmetic, so it gives identical results for identical facts. Model output can vary slightly, so the extracted facts are saved on the first run and every re-run reads that saved copy. Validation and human review cover anything uncertain. Reviewers would see the overall score, individual criterion scores, supporting evidence and reasons for each ranking. Missing weighted information would receive zero points and be clearly identified.
 B is ineligible because the bidder does not demonstrate the mandatory electrical contractor licence. D receives zero for its missing timeline but remains eligible for ranking because its mandatory requirements are satisfied.
 
 3. Humans in the Loop
@@ -40,7 +40,7 @@ Wrong extraction. Every fact needs a quote, and code checks that the quote exist
 
 Hallucination/Made-up facts. Missing information is null by rule, never filled in. A missing schedule, as in D, scores zero for timeline and is flagged, not assumed. Every extracted value should have supporting evidence and a page reference. Unsupported information would be marked as missing rather than assumed.
 
-Prompt Injection/ Manipulation. Proposal C hides an instruction aimed at AI reviewers. The prompt treats proposal text as data, the model reports the attempt, and code flags it. Even if the model were fooled, it cannot score, so the instruction has nothing to act on. I chose flagged over ineligible because the real content is fine and a human should judge whether the bidder wrote it. Its legitimate content may score some value, which the reviewer can see.
+Prompt Injection/ Manipulation. Proposal C hides an instruction aimed at AI reviewers. The prompt treats proposal text as data, the model reports the attempt, and code flags it. Manipulation can only change the facts the model reports, and every fact needs a quote and page that code verifies, so a false claim has nothing to point to. Any security flag also holds the proposal for a human. I chose flagged over ineligible because the real content is fine and a human should judge whether the bidder wrote it. Its legitimate content would score about 76, which the reviewer can see.
 
 Gaming the gates. Proposal B is the cheapest, but its licence belongs to a subcontractor yet to be named. The brief says the bidder must hold it, so B is ineligible. Price never rescues a mandatory failure.
 
