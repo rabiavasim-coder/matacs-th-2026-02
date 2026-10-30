@@ -4,13 +4,14 @@ Time Spent 2.5 hrs
 
 IDEA
 
-The AI reads, the code decides, and a person approves. The model only turns proposal text into structured facts, with a quote for every fact. Scoring, ranking and the pass/fail checks are plain code, so results are repeatable and can be explained to a bidder. A reviewer confirms or overrides the final ranking.
+AI reads and extract, the code decides, and a person approves. The model only turns proposal text into structured facts, with a quote for every fact. Scoring, ranking and the pass/fail checks are plain code, so results are repeatable and can be explained to a bidder. A reviewer confirms or overrides the final ranking.
 
 
 WRITEUP.md	-    Answers to the five questions
 PROMPTS.md	-    The extraction prompt and the optional explanation prompt, as I would send them
-diagram/process-flow.png	  -   Process flow from upload to ranked output, showing AI steps, rule-based steps and human checkpoints
 ranking.json-  Expected ranking of proposals A to E
+diagram.png -   Process flow from upload to ranked output, showing AI steps, rule-based steps and human checkpoints
+
 
 I did not build the optional prototype.
 
